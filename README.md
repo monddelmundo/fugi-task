@@ -10,16 +10,16 @@ Will need to install nodemon if not already installed.
 ## Basic Usage
 ****
 1. Clone this repository
-1. Change directory to `MyApp/server` and start the web server
+1. Change directory to `iTask/server` and start the web server
     ```
-    $ cd iTask-challenge/server
+    $ cd iTask/server
     $ npm install
     $ nodemon
     ```    
     The Yote server is now listening at `http://localhost:3030` and watching for changes.   
-1. In a **new terminal**, change directory to `MyApp/web` and start the client
+1. In a **new terminal**, change directory to `iTask/web` and start the client
     ```
-    $ cd iTask-challenge/web
+    $ cd iTask/web
     $ npm install 
     $ npm run debug
     ```
