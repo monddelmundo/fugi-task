@@ -121,7 +121,7 @@ class DefaultTopNav extends Binder {
           <div className="titles">
             <NavLink to="/" className="nav-logo" >
               <img src="/img/yote_logo.png"/>
-              <span className="-subtitle"> Standard Yote Dev Kit </span>
+              <span className="-subtitle"> Yote TaskFlows </span>
             </NavLink>
           </div>
           <div className="actions">

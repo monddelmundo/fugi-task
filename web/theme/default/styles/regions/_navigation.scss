@@ -73,7 +73,7 @@ a.nav-logo,
     @include align-items(stretch);
     .-subtitle {
       margin-left: $gutter;
-      color: rgba(255,255,255, 0.8);
+      color: rgba(0,0,0, 0.6);
       @include base-font;
       font-weight: normal;
     }
