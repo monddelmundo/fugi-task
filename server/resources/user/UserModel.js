@@ -126,14 +126,23 @@ function createDefaults() {
       password_salt = User.createPasswordSalt();
       password_hash = User.hashPassword(password_salt, 'admin');
       User.create({
-        firstName:'Admin'
-        , lastName:'Admin'
-        , username:'admin@admin.com'
+        firstName:'John'
+        , lastName:'Doe'
+        , username:'john@doe.com'
+        , password_salt: password_salt
+        , password_hash: password_hash
+        , roles: []
+      });User.create({
+        firstName:'Jane'
+        , lastName:'Smith'
+        , username:'jane@smith.com'
         , password_salt: password_salt
         , password_hash: password_hash
         , roles: ['admin']
       });
-      logger.info("created initial default user w/ username 'admin@admin.com' and password 'admin'");
+      logger.info("created two initial default users:");
+      logger.info( "username 'john@doe.com' and password 'admin'");
+      logger.info( "username 'jane@smith.com' and password 'admin' -- Jane has admin priveleges");
     }
   });
 }
