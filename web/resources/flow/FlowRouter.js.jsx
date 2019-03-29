@@ -26,9 +26,9 @@ class FlowRouter extends Binder {
   render() {
     return (
       <Switch>
-        <YTRoute exact path="/flows" component={FlowList} />
+        <YTRoute exact login={true} path="/flows" component={FlowList} />
         <YTRoute exact login={true} path="/flows/new" component={CreateFlow} />
-        <YTRoute exact path="/flows/:flowId" component={SingleFlow}/>
+        <YTRoute exact login={true} path="/flows/:flowId" component={SingleFlow}/>
         <YTRoute exact login={true} path="/flows/:flowId/update" component={UpdateFlow}/>
       </Switch>
     )

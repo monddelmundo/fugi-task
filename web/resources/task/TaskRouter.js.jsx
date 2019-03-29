@@ -26,9 +26,9 @@ class TaskRouter extends Binder {
   render() {
     return (
       <Switch>
-        <YTRoute exact path="/tasks" component={TaskList} />
+        <YTRoute exact login={true}  path="/tasks" component={TaskList} />
         <YTRoute exact login={true} path="/tasks/new" component={CreateTask} />
-        <YTRoute exact path="/tasks/:taskId" component={SingleTask}/>
+        <YTRoute exact login={true}  path="/tasks/:taskId" component={SingleTask}/>
         <YTRoute exact login={true} path="/tasks/:taskId/update" component={UpdateTask}/>
       </Switch>
     )
