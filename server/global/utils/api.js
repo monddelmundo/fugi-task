@@ -20,7 +20,7 @@ exports.defaultValueFromSchema = (schemaType) => {
       }
     }
     case "String": {
-      val = schemaType.defaultValue ? schemaType.defaultValue : null;
+      val = schemaType.defaultValue ? schemaType.defaultValue : "";
       break;
     }
     case "ObjectID": {

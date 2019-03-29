@@ -15,8 +15,10 @@ module.exports = function(config) {
 
   // any other initial model calls
   User.createDefaults();
-  Product.createDefaults();
+  Flow.createDefaults();
 };
 
 // Yote models are defined below
-let Product = require('./resources/product/ProductModel');
+let Task = require('./resources/task/TaskModel');
+let Flow = require('./resources/flow/FlowModel');
+let Note = require('./resources/note/NoteModel');
