@@ -1,5 +1,34 @@
 
-## The Yote Super Stack
+## Prerequisites
+****
+
+We assume at least intermediate-level knowledge of Javascript. For the server you'll need to [MondoDB](https://docs.mongodb.com/master/tutorial/install-mongodb-on-os-x/?_ga=1.204328082.326616756.1489430903) installed and running, and [NodeJS >= v8.9.0](https://nodejs.org/en/). For the web client and mobile, it's best to have at least a basic understanding of [ReactJS](https://reactjs.com/) and [Redux](https://redux.js.org/).  
+> Redux can be a little tricky to wrap your brain around &mdash; particularly the `reducer` mapping. If you want to simply trust us that it works, you can just follow the patterns and you should pick it up eventually.  
+
+Will need to install nodemon if not already installed. 
+
+## Basic Usage
+****
+1. Clone this repository
+1. Change directory to `MyApp/server` and start the web server
+    ```
+    $ cd iTask-challenge/server
+    $ npm install
+    $ nodemon
+    ```    
+    The Yote server is now listening at `http://localhost:3030` and watching for changes.   
+1. In a **new terminal**, change directory to `MyApp/web` and start the client
+    ```
+    $ cd iTask-challenge/web
+    $ npm install 
+    $ npm run debug
+    ```
+    This runs the Yote client in watch & debug mode to look for and recompile changes to the `bundle.js`
+1. Using a browser, go to `http://localhost:3030` and you'll see "Welcome to iTask!"
+
+
+
+## Built with the Yote Super Stack
 ****  
 
 > **WTH is a super-stack solution?**  Glad you asked.  A 'super-stack' is a made up term for a solution that provides a web application, native mobile apps, and api services out of the box.
@@ -31,29 +60,6 @@ Yote itself is not a framework. It's not even really a library. Our idea is to s
 
 
 
-
-## Prerequisites
-****
-
-We assume at least intermediate-level knowledge of Javascript. For the server you'll need to [MondoDB](https://docs.mongodb.com/master/tutorial/install-mongodb-on-os-x/?_ga=1.204328082.326616756.1489430903) installed and running, and [NodeJS >= v8.9.0](https://nodejs.org/en/). For the web client and mobile, it's best to have at least a basic understanding of [ReactJS](https://reactjs.com/) and [Redux](https://redux.js.org/).  
-> Redux can be a little tricky to wrap your brain around &mdash; particularly the `reducer` mapping. If you want to simply trust us that it works, you can just follow the patterns and you should pick it up eventually.  
-
-
-## Basic Usage
-****
-1. Change directory to `MyApp/server` and start the web server
-    ```
-    $ cd MyApp/server
-    $ nodemon
-    ```    
-    The Yote server is now listening at `http://localhost:3030` and watching for changes.   
-1. In a new terminal, change directory to `MyApp/web` and start the client
-    ```
-    $ cd MyApp/web
-    $ npm run debug
-    ```
-    This runs the Yote client in watch mode to look for and recompile changes to the `bundle.js`
-1. Using a browser, go to `http://localhost:3030` and you'll see "Welcome to Yote!"
 
 
 
