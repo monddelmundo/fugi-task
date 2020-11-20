@@ -36,15 +36,21 @@ class SingleFlow extends Binder {
        * things that manipulate the form, but don't directly effect the state of
        * the task
        */
+      user: {},
     };
     this._bind("_handleFormChange", "_handleTaskSubmit");
   }
 
   componentDidMount() {
-    const { dispatch, match } = this.props;
+    const { dispatch, match, userStore } = this.props;
     dispatch(flowActions.fetchSingleIfNeeded(match.params.flowId));
+    // dispatch(userActions.fetchListIfNeeded());
     dispatch(taskActions.fetchDefaultTask());
     dispatch(taskActions.fetchListIfNeeded("_flow", match.params.flowId));
+
+    this.setState({
+      user: userStore.loggedIn.user,
+    });
   }
 
   componentWillReceiveProps(nextProps) {
@@ -236,6 +242,7 @@ const mapStoreToProps = (store) => {
     defaultTask: store.task.defaultItem,
     flowStore: store.flow,
     taskStore: store.task,
+    userStore: store.user,
   };
 };
 

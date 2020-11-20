@@ -20,6 +20,7 @@ $font-color: $btn-color-hover;
   border-color: $btn-color;
   color: $font-color;
   border: 1px solid;
+  margin-left: 5px;
   &:hover {
     background-color: $btn-color-hover !important;
     border-color: $btn-color !important;
@@ -36,6 +37,13 @@ $font-color: $btn-color-hover;
   padding: 0 !important;
   color: $font-color;
   margin-top: 25px;
+  cursor: pointer;
+}
+
+.task-list-item-link {
+  background: none !important;
+  border: none;
+  color: black !important;
   cursor: pointer;
 }
 
@@ -57,7 +65,7 @@ $font-color: $btn-color-hover;
 
 .task-name-para-completed {
   @extend .task-name-para;
-  text-decoration: line-through;
+  text-decoration: red line-through;
 }
 
 .flow-list-tasks {
@@ -68,6 +76,7 @@ $font-color: $btn-color-hover;
 .checkbox.checkbox {
   width: 15px; /*Desired width*/
   height: 15px; /*Desired height*/
+  margin-right: 5px;
   cursor: pointer;
 }
 
@@ -87,4 +96,18 @@ $font-color: $btn-color-hover;
 
 .note-form.note-form.note-form {
   width: 400px;
+}
+
+.single-task-btn-approve {
+  background-color: #22a194;
+  margin-right: 20px;
+  border: none;
+  padding: 5px 15px 5px 15px;
+  border-radius: 4px;
+  color: white;
+}
+
+.single-task-btn-reject {
+  @extend .single-task-btn-approve;
+  background-color: #cc4656;
 }

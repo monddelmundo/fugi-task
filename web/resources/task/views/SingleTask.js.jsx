@@ -45,19 +45,32 @@ class SingleTask extends Binder {
       user: {},
       userList: {},
     };
-    this._bind("_handleFormChange", "_handleCommentSubmit");
+    this._bind(
+      "_handleFormChange",
+      "_handleCommentSubmit",
+      "_handleBtnApprove",
+      "_handleBtnReject"
+    );
   }
 
   componentDidMount() {
-    const { dispatch, match } = this.props;
+    const { dispatch, match, noteStore, userStore } = this.props;
     dispatch(userActions.fetchListIfNeeded());
     dispatch(taskActions.fetchSingleIfNeeded(match.params.taskId));
     //dispatch(noteActions.fetchDefaultNote());
     dispatch(noteActions.fetchListIfNeeded("_task", match.params.taskId));
+
+    this.setState({
+      user: userStore.loggedIn.user,
+    });
+
+    this.setState({
+      note: noteStore.lists,
+    });
   }
 
   componentWillReceiveProps(nextProps) {
-    const { dispatch, match, taskStore, noteStore, userStore } = nextProps;
+    const { dispatch, match, taskStore } = nextProps;
     this.setState({
       task: taskStore.byId[match.params.taskId]
         ? _.cloneDeep(taskStore.byId[match.params.taskId])
@@ -67,37 +80,51 @@ class SingleTask extends Binder {
 
     //get note
     dispatch(noteActions.fetchListIfNeeded("_task", match.params.taskId));
-    // this.setState({
-    //   note: _.cloneDeep(nextProps.defaultNote.obj),
-    // });
-
-    this.setState({
-      user: userStore.loggedIn.user,
-    });
-
-    this.setState({
-      note: noteStore.lists,
-    });
-
-    // this.setState({
-    //   userList: userStore.byId,
-    // });
-
-    //console.log("USERSTORE:", userStore);
   }
 
   _handleBack = () => {
     this.props.history.goBack();
   };
 
+  _handleBtnApprove = () => {
+    const { dispatch } = this.props;
+    const newState = {
+      ...this.state.task,
+      status: "approved",
+    };
+
+    dispatch(taskActions.sendUpdateTask(newState)).then((taskRes) => {
+      if (!taskRes.success) {
+        alert("ERROR - Check logs");
+      }
+    });
+  };
+
+  _handleBtnReject = () => {
+    const { dispatch } = this.props;
+    const newState = {
+      ...this.state.task,
+      complete: false,
+      status: "open",
+    };
+
+    dispatch(taskActions.sendUpdateTask(newState)).then((taskRes) => {
+      if (!taskRes.success) {
+        alert("ERROR - Check logs");
+      }
+    });
+  };
+
   _handleCheckBoxChange = (e) => {
     const { dispatch } = this.props;
-
     const complete = !this.state.task.complete;
     const newState = {
       ...this.state.task,
       complete,
     };
+    if (complete) newState.status = "awaiting_approval";
+    else newState.status = "open";
+
     dispatch(taskActions.sendUpdateTask(newState)).then((taskRes) => {
       if (!taskRes.success) {
         alert("ERROR - Check logs");
@@ -187,11 +214,12 @@ class SingleTask extends Binder {
                   type="checkbox"
                   name="status"
                   className="checkbox-lg"
-                  checked={
-                    selectedTask && selectedTask.complete
-                      ? selectedTask.complete
-                      : false
+                  disabled={
+                    selectedTask && selectedTask.status === "open"
+                      ? false
+                      : true
                   }
+                  checked={selectedTask && selectedTask.complete ? true : false}
                   onChange={this._handleCheckBoxChange}
                 />
                 &nbsp; <p className="single-task-p">{selectedTask.name}</p>
@@ -206,6 +234,26 @@ class SingleTask extends Binder {
             <p>
               <em>{selectedTask.description}</em>
             </p>
+            {this.state.user &&
+            this.state.user.roles &&
+            this.state.user.roles.includes("admin") &&
+            selectedTask &&
+            selectedTask.status === "awaiting_approval" ? (
+              <div>
+                <button
+                  className="single-task-btn-approve"
+                  onClick={this._handleBtnApprove}
+                >
+                  Approve
+                </button>
+                <button
+                  className="single-task-btn-reject"
+                  onClick={this._handleBtnReject}
+                >
+                  Reject
+                </button>
+              </div>
+            ) : null}
             <hr />
             {isNoteListEmpty ? (
               isNoteListFetching ? (
@@ -218,7 +266,6 @@ class SingleTask extends Binder {
                 <ul>
                   {noteListItems && noteListItems.length > 0
                     ? noteListItems.map((note, i) => {
-                        //if (note._task === selectedTask._id)
                         return (
                           <NoteListItem
                             fromTask={true}
@@ -227,7 +274,6 @@ class SingleTask extends Binder {
                             note={note}
                           />
                         );
-                        //else return null;
                       })
                     : null}
                 </ul>

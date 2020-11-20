@@ -11,18 +11,24 @@ const TaskListItem = ({ task, fromFlow }) => {
         <TaskItem className="flow-list-tasks" task={task} />
       ) : (
         <div className="task-item">
-          <TaskItem task={task} />
           {!task.complete ? (
-            <div className="task-desc-and-btn">
-              <p>{task.description}</p>
-              <Link
-                className="yt-btn x-small bordered comment-link"
-                to={`/tasks/${task._id}`}
-              >
-                Comment
-              </Link>
+            <div>
+              <TaskItem task={task} />
+              <div className="task-desc-and-btn">
+                <p style={{ marginLeft: 5 }}>{task.description}</p>
+                <Link
+                  className="yt-btn x-small bordered comment-link"
+                  to={`/tasks/${task._id}`}
+                >
+                  Comment
+                </Link>
+              </div>
             </div>
-          ) : null}
+          ) : (
+            <Link className="task-list-item-link" to={`/tasks/${task._id}`}>
+              <TaskItem task={task} />
+            </Link>
+          )}
         </div>
       )}
     </div>

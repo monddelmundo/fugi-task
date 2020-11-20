@@ -14,9 +14,13 @@ const NoteListItem = ({ note, fromTask, userList }) => {
     </li>
   ) : (
     <div>
-      <h3>{`${user.firstName} ${user.lastName}`}</h3>
-      <p>{dateCreated.toLocaleString("en-US").replace(",", " @")}</p>
-      <p>{note.content}</p>
+      <h4
+        style={{ fontWeight: 1000, marginBottom: 0 }}
+      >{`${user.firstName} ${user.lastName}`}</h4>
+      <h6 style={{ display: "inline" }}>
+        {dateCreated.toLocaleString("en-US").replace(",", " @")}
+      </h6>
+      <p style={{ marginTop: 10, marginBottom: 20 }}>{note.content}</p>
     </div>
   );
 };
